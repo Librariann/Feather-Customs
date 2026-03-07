@@ -1,0 +1,53 @@
+
+{
+  "birds": [
+	{
+	  "id": "bean_goose",
+	  "name_ko": "큰기러기",
+	  "name_en": "Bean Goose",
+	  "rarity": "common",
+	  "trait": "normal",
+	  "description": "기본형 철새"
+	},
+	{
+	  "id": "mallard",
+	  "name_ko": "청둥오리",
+	  "name_en": "Mallard",
+	  "rarity": "common",
+	  "trait": "extra_baggage",
+	  "description": "짐이 많은 편"
+	},
+	{
+	  "id": "whooper_swan",
+	  "name_ko": "큰고니",
+	  "name_en": "Whooper Swan",
+	  "rarity": "uncommon",
+	  "trait": "special_permit",
+	  "description": "특수 허가증 등장 확률 증가"
+	},
+	{
+	  "id": "vega_gull",
+	  "name_ko": "재갈매기",
+	  "name_en": "Vega Gull",
+	  "rarity": "common",
+	  "trait": "fish_carrier",
+	  "description": "물고기 소지 확률 증가"
+	},
+	{
+	  "id": "oriental_stork",
+	  "name_ko": "황새",
+	  "name_en": "Oriental Stork",
+	  "rarity": "rare",
+	  "trait": "vip_pass",
+	  "description": "VIP 통행증 등장"
+	},
+	{
+	  "id": "white_naped_crane",
+	  "name_ko": "재두루미",
+	  "name_en": "White-naped Crane",
+	  "rarity": "uncommon",
+	  "trait": "priority_queue",
+	  "description": "대기열 우선권 보유"
+	}
+  ]
+}

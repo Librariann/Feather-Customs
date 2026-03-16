@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dnnj0wusgattm"]
+
+[ext_resource type="Script" uid="uid://wwkbwtfcxvpc" path="res://scenes/main.gd" id="1_o5qli"]
+
+[node name="Main" type="Node2D" unique_id=311834492]
+script = ExtResource("1_o5qli")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=675293618]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=970384181]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NextBirdButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=21143501]
+layout_mode = 2
+text = "다음 철새"
+
+[node name="PassportPanel" type="Panel" parent="CanvasLayer/HBoxContainer" unique_id=1536737576]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/PassportPanel" unique_id=205102683]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BirdTypeLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=1319383359]
+layout_mode = 2
+
+[node name="DestinationLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=897802483]
+layout_mode = 2
+
+[node name="StampLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=2083444501]
+layout_mode = 2
+
+[node name="BaggageLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=959370125]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=1603119319]
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=278822091]
+layout_mode = 2
+
+[node name="ApproveButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=684574044]
+layout_mode = 2
+text = "승인"
+
+[node name="HoldButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=426968462]
+layout_mode = 2
+text = "보류"
+
+[node name="ConfiscateButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=633717533]
+layout_mode = 2
+text = "회수"
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/NextBirdButton" to="." method="_on_next_bird_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ApproveButton" to="." method="_on_approve_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/HoldButton" to="." method="_on_hold_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ConfiscateButton" to="." method="_on_confiscate_button_pressed"]

@@ -7,6 +7,10 @@ extends Node2D
 @onready var score_label: Label = $CanvasLayer/HBoxContainer/ScoreLabel
 @onready var result_label: Label = $CanvasLayer/HBoxContainer/ResultLabel
 
+var inspected_count := 0
+var wave_size := 6
+var destination_history: Array = []
+var current_wind_rule: Dictionary = {}
 var current_bird: Dictionary = {}
 var score := 0
 
@@ -130,6 +134,80 @@ func get_correct_action(bird: Dictionary) -> String:
 	if passport["is_valid"] == false:
 		return "hold"
 	return "approve"
+	
+func record_destination(destination: String) -> void:
+	destination_history.append(destination)
+
+func get_recent_destinations() -> Array:
+	var start_index = max(0, destination_history.size() - wave_size)
+	return destination_history.slice(start_index, destination_history.size())
+
+func count_destinations(destinations_to_count: Array) -> Dictionary:
+	var result := {}
+
+	for destination in destinations_to_count:
+		if not result.has(destination):
+			result[destination] = 0
+		result[destination] += 1
+	return result
+
+func create_wind_rule_from_destinations(destinations_to_analyze: Array) -> Dictionary:
+	var counts := count_destinations(destinations_to_analyze)
+
+	var north_count: int= counts.get("북쪽 하늘", 0)
+	var south_count: int= counts.get("남쪽 하늘", 0)
+	var east_count: int= counts.get("동쪽 항로", 0)
+	var west_count: int= counts.get("서쪽 항로", 0)
+
+	if north_count >= 4:
+		return {
+			"id": "north_wind",
+			"name": "북풍",
+			"description": "북쪽 하늘로 향하는 철새가 급증했습니다. 다음 웨이브에서 북쪽 항로가 활성화됩니다.",
+			"effect_type": "destination_bias",
+			"target": "북쪽 하늘",
+			"value": 30
+		}
+
+	if south_count >= 4:
+		return {
+			"id": "south_wind",
+			"name": "남풍",
+			"description": "남쪽 하늘로 향하는 철새가 급증했습니다. 다음 웨이브에서 남쪽 항로가 활성화됩니다.",
+			"effect_type": "destination_bias",
+			"target": "남쪽 하늘",
+			"value": 30
+		}
+
+	if east_count + west_count >= 4:
+		return {
+			"id": "jet_stream",
+			"name": "제트기류",
+			"description": "동서 항로 이동량이 증가했습니다. 다음 웨이브에서 대기열 흐름이 빨라집니다.",
+			"effect_type": "queue_shift",
+			"target": "horizontal_routes",
+			"value": 1
+		}
+
+	return {
+		"id": "turbulence",
+		"name": "난기류",
+		"description": "목적지가 분산되어 바람길이 불안정합니다.",
+		"effect_type": "unstable",
+		"target": "all",
+		"value": 1
+	}
+	
+func generate_wind_rule() -> void:
+	var recent_destinations := get_recent_destinations()
+	current_wind_rule = create_wind_rule_from_destinations(recent_destinations)
+
+	print("===== 바람 규칙 생성 =====")
+	print("검사 수: ", inspected_count)
+	print("최근 목적지: ", recent_destinations)
+	print("생성된 규칙: ", current_wind_rule)
+
+	result_label.text = "새 바람 규칙: " + current_wind_rule["name"]
 
 func judge_action(player_action: String) -> void:
 
@@ -143,6 +221,10 @@ func judge_action(player_action: String) -> void:
 		score -= 5
 		result_label.text = "오답 / 정답: " + correct_action
 	score_label.text = "점수: " + str(score)
+	record_destination(current_bird["passport"]["destination"])
+	inspected_count += 1
+	if inspected_count % wave_size == 0:
+		generate_wind_rule()
 	current_bird = generate_bird()
 	display_bird(current_bird)
 

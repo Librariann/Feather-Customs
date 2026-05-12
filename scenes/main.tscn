@@ -15,6 +15,18 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "다음 철새"
 
+[node name="ApproveButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=684574044]
+layout_mode = 2
+text = "승인"
+
+[node name="HoldButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=426968462]
+layout_mode = 2
+text = "보류"
+
+[node name="ConfiscateButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=633717533]
+layout_mode = 2
+text = "회수"
+
 [node name="PassportPanel" type="Panel" parent="CanvasLayer/HBoxContainer" unique_id=1536737576]
 layout_mode = 2
 
@@ -35,23 +47,11 @@ layout_mode = 2
 [node name="BaggageLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=959370125]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=1603119319]
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=1603119319]
 layout_mode = 2
 
-[node name="ResultLabel" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=278822091]
+[node name="ResultLabel" type="Label" parent="CanvasLayer/HBoxContainer/PassportPanel/VBoxContainer" unique_id=278822091]
 layout_mode = 2
-
-[node name="ApproveButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=684574044]
-layout_mode = 2
-text = "승인"
-
-[node name="HoldButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=426968462]
-layout_mode = 2
-text = "보류"
-
-[node name="ConfiscateButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=633717533]
-layout_mode = 2
-text = "회수"
 
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/NextBirdButton" to="." method="_on_next_bird_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/ApproveButton" to="." method="_on_approve_button_pressed"]
